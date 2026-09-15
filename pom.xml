@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.marsline</groupId>
+    <artifactId>marsline-eip</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>MARSLINE Enterprise Integration Patterns</name>
+    <description>ITP103 Midterm Lab Exam - Group MARSLINE - EIP implementation</description>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <camel.version>4.8.0</camel.version>
+        <!--
+            ActiveMQ "Classic" 6.1.8.
+            Camel 4.x's camel-jms depends on jakarta.jms-api (jakarta.jms.*),
+            not the older javax.jms.* API. ActiveMQ Classic only ships a
+            jakarta.jms-based activemq-client/activemq-broker pair starting
+            at the 6.0.x line; the 5.18.x line is javax.jms-based and is
+            NOT compatible with camel-jms 4.8.0's JmsComponent, which
+            requires a jakarta.jms.ConnectionFactory. 6.1.8 is a mature
+            patch of the 6.1.x line and, per ActiveMQ's own migration docs,
+            supports the embedded/VM broker transport this project relies
+            on (the 5.18.x "activemq-client-jakarta" transition shim
+            explicitly does NOT support embedded/VM brokers, so it is not
+            an option here).
+        -->
+        <activemq.version>6.1.8</activemq.version>
+        <jackson.version>2.17.2</jackson.version>
+        <slf4j.version>2.0.13</slf4j.version>
+
+        <exec.mainClass>com.marsline.eip.MarslineEipApplication</exec.mainClass>
+    </properties>
+
+    <!--
+        camel-bom keeps camel-core / camel-jms and their transitive
+        dependencies (e.g. Spring JMS support classes used by camel-jms)
+        on matching, tested versions.
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-bom</artifactId>
+                <version>${camel.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!-- Apache Camel core engine -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+        </dependency>
+
+        <!-- Camel JMS component (used for every queue in this project) -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+        </dependency>
+
+        <!--
+            Embedded JMS provider: ActiveMQ "Classic" (jakarta.jms line, 6.1.x).
+            activemq-client   -> the JMS ConnectionFactory / API implementation,
+                                 built against jakarta.jms - matches camel-jms 4.8.0.
+            activemq-broker   -> lets the vm:// transport auto-start an
+                                 in-process broker with NO external server,
+                                 NO install, NO Docker - just a JVM.
+            Do NOT use the 5.18.x line here: it is javax.jms-based and will
+            not satisfy camel-jms 4.8.0's JmsComponent (jakarta.jms.ConnectionFactory).
+        -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>${activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>${activemq.version}</version>
+        </dependency>
+
+        <!-- JSON (used to build/parse the booking payloads) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Logging: slf4j-simple keeps console output readable, no config server needed -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>marsline-eip</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+
+            <!--
+                Lets us run the project with a plain:
+                    mvn compile exec:java -Dexec.args="task1"
+                without building/running a shaded jar.
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <mainClass>${exec.mainClass}</mainClass>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

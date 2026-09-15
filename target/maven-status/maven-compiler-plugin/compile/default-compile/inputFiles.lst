@@ -1,0 +1,12 @@
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\broker\BrokerConfig.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\MarslineEipApplication.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\model\BookingMessage.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task1\Task1MessageChannel.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task2\Task2ContentBasedRouter.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task3\BookingAggregationStrategy.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task3\BookingPart.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task3\BookingSummary.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task3\Task3Aggregator.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task4\LegacyTicket.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task4\Task4MessageTranslator.java
+C:\Users\My Computer\Downloads\marsline-eip-updated\marsline-eip\src\main\java\com\marsline\eip\task5\Task5ErrorChannelRetry.java

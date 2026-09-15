@@ -1,0 +1,16 @@
+com\marsline\eip\task2\Task2ContentBasedRouter$1.class
+com\marsline\eip\task1\Task1MessageChannel.class
+com\marsline\eip\task3\BookingPart.class
+com\marsline\eip\task4\Task4MessageTranslator.class
+com\marsline\eip\task3\Task3Aggregator$1.class
+com\marsline\eip\task3\Task3Aggregator.class
+com\marsline\eip\task3\BookingAggregationStrategy.class
+com\marsline\eip\broker\BrokerConfig.class
+com\marsline\eip\task2\Task2ContentBasedRouter$TestCase.class
+com\marsline\eip\task4\LegacyTicket.class
+com\marsline\eip\MarslineEipApplication.class
+com\marsline\eip\task2\Task2ContentBasedRouter.class
+com\marsline\eip\model\BookingMessage.class
+com\marsline\eip\task4\Task4MessageTranslator$1.class
+com\marsline\eip\task3\BookingSummary.class
+com\marsline\eip\task1\Task1MessageChannel$1.class
